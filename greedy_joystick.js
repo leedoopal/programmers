@@ -27,7 +27,7 @@ function solution(name) {
       }
 
       // 총 네임에서 더해준 temp를 뺀다.
-      countTemp = name.length - 1 - temp;
+      countTemp = name.length - 1 - temp - 1;
     }
   }
 
