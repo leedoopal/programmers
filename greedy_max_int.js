@@ -1,3 +1,5 @@
+// url: https://programmers.co.kr/learn/courses/30/lessons/42883
+
 function solution(number, k) {
   const stack = [];
   let answer = '';

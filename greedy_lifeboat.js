@@ -1,3 +1,5 @@
+// url: https://programmers.co.kr/learn/courses/30/lessons/42885
+
 function solution(people, limit) {
   // 내림차순을 먼저 한다.
   let stack = people.sort((a, b) => b - a);
