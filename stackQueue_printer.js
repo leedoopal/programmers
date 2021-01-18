@@ -2,17 +2,17 @@
 
 function solution(priorities, location) {
   let answer = 0;
-  let arr = priorities.map((v, i) => {
+  let queue = priorities.map((v, i) => {
     return { location: i === location, value: v }
   });
 
-  while (arr.length) {
+  while (queue.length) {
     // 맨 앞의 값을 가져온다.
-    let current = arr.shift();
+    let current = queue.shift();
 
     // 비교해서 가장 큰 값이 아니면 제일 뒤로 보낸다.
-    if (arr.some(v => v.value > current.value)) {
-      arr.push(current);
+    if (queue.some(v => v.value > current.value)) {
+      queue.push(current);
     } else {
       // current가 가장 높은 우선순위의 값이라면 answer++
       answer++;
