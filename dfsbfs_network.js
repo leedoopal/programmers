@@ -1,24 +1,25 @@
 // url: https://programmers.co.kr/learn/courses/30/lessons/43162
 
 function solution(n, computers) {
-  let arr = new Array(n).fill(0);
+  let arr = new Array(n).fill(false);
+  let answer = 0;
 
-  for (let i = 0; i < computers.length; i++) {
-    const equalArr = computers[i].filter((number) => number === 1).length;
-    if (equalArr === n) {
-      arr = new Array(n).fill(0);
-      arr[0] = 1;
-      break;
-    } else if (equalArr > 1) {
-      computers[i].forEach((number, j) => {
-        if (number === 1 && arr[j] !== 1) {
-          arr[equalArr - 1] = 1;
-        }
-      })
-    } else {
-      arr[i] = 1;
+  function dfs(index) {
+    arr[index] = true;
+
+    for (let i = 0; i < computers.length; i++) {
+      if (computers[index][i] === 1 && !arr[i]) {
+        dfs(i);
+      }
     }
   }
 
-  return arr.filter(v => v === 1).length;
+  for (let j = 0; j < computers.length; j++) {
+    if (!arr[j]) {
+      answer++;
+      dfs(j);
+    }
+  }
+
+  return answer;
 }
