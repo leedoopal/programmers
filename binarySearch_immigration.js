@@ -7,3 +7,39 @@
 // 입국심사를 기다리는 사람 수 n, 각 심사관이 한 명을 심사하는데 걸리는 시간이 담긴 배열 times가 매개변수로 주어질 때,
 // 모든 사람이 심사를 받는데 걸리는 시간의 최솟값을 return 하도록 solution 함수를 작성해주세요.
 
+function solution(n, times) {
+  const arr = times.sort((a, b) => a - b);
+
+  // left
+  let min = 1;
+  // 가장 오래 걸리는 심사(times의 최댓값) * 사람 수
+  let max = times[times.length - 1] * n;
+  let answer = max;
+
+  while (min <= max) {
+    // 현재 중간값을 구하고
+    let mid = parseInt((min + max) / 2);
+    let count = 0;
+
+    for (let i = 0; i < arr.length; i++) {
+      // 중간값 / 시간을 한다
+      // 그러면 현재 중간값까지 몇명의 사람이 지나갔는지 알 수 있다
+      count += parseInt(mid / times[i]);
+
+      // !사람 수가 같아지면 결과를 구한다!
+      if (count >= n) {
+        answer = Math.min(answer, mid);
+      }
+    }
+
+    if (count >= n) {
+      // n명의 사람들이 검사 받기에 충분함 -> 시간을 줄인다
+      max = mid - 1;
+    } else {
+      // n명의 사람들이 검사 받기에 모자람 -> 시간을 늘린다
+      min = mid + 1;
+    }
+  }
+
+  return answer;
+}
